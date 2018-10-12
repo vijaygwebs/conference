@@ -28,7 +28,7 @@ $this->title = Yii::t('app', Yii::$app->name);
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
             </div>
             <div class="col-lg-3">
-                <h3>Yii forum</h3>
+                <h3>Yii forums</h3>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
