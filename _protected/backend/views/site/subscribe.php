@@ -1,7 +1,6 @@
 <?php
-
-/* @var $this yii\web\View */
 use common\components\newsletter\NewsletterWidget;
-$this->title = Yii::t('app', Yii::$app->name);
+use yii\helpers\Html;
+$this->title = yii::t('app','Subcribe us');
 ?>
 <?= NewsletterWidget::widget();?>

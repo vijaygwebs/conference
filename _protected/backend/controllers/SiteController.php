@@ -6,6 +6,9 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use Yii;
+use common\components\newsletter\NewsletterWidget;
+use yii\web\Response;
+use common\components\newsletterpjax\models\NewsletterPjaxModel;
 
 /**
  * Site controller.
@@ -29,7 +32,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','widgets','subscribe','pjax','submitform','ajaxform'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -99,6 +102,31 @@ class SiteController extends Controller
             return $this->render('login', [
                 'model' => $model,
             ]);
+        }
+    }
+    /* action for widgets */
+    public function actionWidgets(){
+        return $this->render('listWidgets');
+    }
+    /* subcribe us / Newsletter action */
+    public function actionSubscribe(){
+
+       return $this->render('subscribe');
+    }
+    /* from submission with pjax */
+    public function actionPjax(){
+        return $this->render('pjax');
+    }
+
+
+    public function actionAjaxform(){
+        return $this->render('ajaxform');
+    }
+
+    public function actionSubmitform(){
+       $model = new NewsletterPjaxModel();
+        if($model->load(yii::$app->request->post()))
+        {
         }
     }
 

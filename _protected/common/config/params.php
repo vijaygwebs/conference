@@ -18,14 +18,14 @@ return [
      *
      * If set to true users will have to login using email/password combo.
      */
-    'lwe' => false, 
+    'lwe' => true,
 
     /**
      * Force Strong Password.
      *
      * If set to true users will have to use passwords with strength determined by StrengthValidator.
      */
-    'fsp' => false,
+    'fsp' => true,
 
     /**
      * Set the password reset token expiration time.

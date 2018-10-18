@@ -15,14 +15,18 @@ class m141022_115823_create_user_table extends Migration
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
+            'firstname' => $this->string()->notNull(),
+            'lastname' => $this->string()->notNull(),
             'email' => $this->string()->notNull()->unique(),
             'password_hash' => $this->string()->notNull(),
             'status' => $this->smallInteger()->notNull(),
+            'usertype' => $this->smallInteger()->notNull()->defaultValue(1),
             'auth_key' => $this->string(32)->notNull(),
             'password_reset_token' => $this->string()->unique(),
             'account_activation_token' => $this->string(),          
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
+
         ], $tableOptions);
     }
 

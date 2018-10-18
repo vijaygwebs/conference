@@ -17,7 +17,7 @@ return [
         // - template comes with: 'default', 'slate', 'spacelab' and 'cerulean'
         'view' => [
             'theme' => [
-                'pathMap' => ['@app/views' => '@webroot/themes/slate/views'],
+                'pathMap' => ['@app/views' => '@webroot/themes/slate'],
                 'baseUrl' => '@web/themes/slate',
             ],
         ],

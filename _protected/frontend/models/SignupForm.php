@@ -12,10 +12,14 @@ use Yii;
  */
 class SignupForm extends Model
 {
+    public $fname;
+    public $lname;
     public $username;
-    public $email;
     public $password;
-    public $status;
+    public $email;
+    public $retypeEmail;
+    public $verifyCode;
+    public $accesscode;
 
     /**
      * Returns the validation rules for attributes.
@@ -25,29 +29,21 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 
-                'message' => 'This username has already been taken.'],
 
+            [['fname', 'lname','username','password'], 'required'],
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
+            ['password','string','min' => 6],
+            ['password','match','pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})^','message' =>'Password must be a combination of atleast one uppercase character,one lowercase character one digit and one special symbol '],
+            [['accesscode'], 'string', 'max' => 20],
+            ['username','string','min' => 6 ,'max' =>20 ],
+            ['username','unique','targetClass' => '\common\models\User','message' => 'This username already taken'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 
+            ['email', 'unique', 'targetClass' => '\common\models\User',
                 'message' => 'This email address has already been taken.'],
-
-            ['password', 'required'],
-            // use passwordStrengthRule() method to determine password strength
-            $this->passwordStrengthRule(),
-
-            // on default scenario, user status is set to active
-            ['status', 'default', 'value' => User::STATUS_ACTIVE, 'on' => 'default'],
-            // status is set to not active on rna (registration needs activation) scenario
-            ['status', 'default', 'value' => User::STATUS_NOT_ACTIVE, 'on' => 'rna'],
-            // status has to be integer value in the given range. Check User model.
-            ['status', 'in', 'range' => [User::STATUS_NOT_ACTIVE, User::STATUS_ACTIVE]]
+            ['retypeEmail', 'compare', 'compareAttribute'=>'email', 'message'=>"Emails don't match"],
+            ['verifyCode', 'captcha'],
         ];
     }
 
@@ -80,9 +76,10 @@ class SignupForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('app', 'Username'),
-            'password' => Yii::t('app', 'Password'),
+            'fname' => Yii::t('app', 'First Name'),
+            'lname' => Yii::t('app', 'Last Name'),
             'email' => Yii::t('app', 'Email'),
+            'retypeEmail' => Yii::t('app', 'Re-enter Email'),
         ];
     }
 
@@ -98,10 +95,13 @@ class SignupForm extends Model
         $user = new User();
 
         $user->username = $this->username;
+        $user->firstname = $this->fname;
+        $user->lastname = $this->lname;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        $user->status = $this->status;
+        ($this->scenario=="rna") ? $user->status = 1 : $user->status = 10;
+
 
         // if scenario is "rna" we will generate account activation token
         if ($this->scenario === 'rna')

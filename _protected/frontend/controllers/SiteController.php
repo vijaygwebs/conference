@@ -272,7 +272,7 @@ class SiteController extends Controller
      * @return string|\yii\web\Response
      */
     public function actionSignup()
-    {  
+    {
         // get setting value for 'Registration Needs Activation'
         $rna = Yii::$app->params['rna'];
 

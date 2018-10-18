@@ -38,6 +38,10 @@ AppAsset::register($this);
             {
                 $menuItems[] = ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']];
                 $menuItems[] = ['label' => Yii::t('app', 'Users'), 'url' => ['/user/index']];
+                $menuItems[] = ['label' => Yii::t('app', 'Widgets'), 'url' => ['/site/widgets']];
+                $menuItems[] = ['label' => Yii::t('app', 'Subscribe'), 'url' => ['/site/subscribe']];
+                $menuItems[] = ['label' => Yii::t('app', 'pjax'), 'url' => ['/site/pjax']];
+                $menuItems[] = ['label' => Yii::t('app', 'ajaxform'), 'url' => ['/site/ajaxform']];
             }
             
             // display Login page to guests of the site

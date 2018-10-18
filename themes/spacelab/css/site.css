@@ -23,7 +23,9 @@ body {
 .jumbotron {
     text-align: center;
 }
-
+.newsletter-main {
+    background: cadetblue;
+}
 .footer {
     height: 60px;
     background-color: #f5f5f5;
